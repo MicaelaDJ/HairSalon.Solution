@@ -12,7 +12,7 @@ namespace HairSalon.Tests
 
     public void Dispose()
     {
-      
+
     }
 
     [TestMethod]
@@ -23,5 +23,12 @@ namespace HairSalon.Tests
       Assert.IsInstanceOfType(newName, typeof(string));
     }
 
+    [TestMethod]
+    public void GetId_TestToReturnNameId_Int()
+    {
+      StylistClass name = new StylistClass("Jeffandrew");
+      var newName = name.GetId();
+      Assert.IsInstanceOfType(newName, typeof(int));
+    }
   }
 }
