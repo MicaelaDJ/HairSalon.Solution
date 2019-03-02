@@ -29,5 +29,6 @@ namespace HairSalon.Models
     {
       return _id;
     }
+
   }
 }
