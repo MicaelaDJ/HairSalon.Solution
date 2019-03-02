@@ -30,5 +30,31 @@ namespace HairSalon.Tests
       var newName = name.GetId();
       Assert.IsInstanceOfType(newName, typeof(int));
     }
+
+    [TestMethod]
+    public void FindById_TestToReturnAListOfStylists_Stylist()
+    {
+      string name = "Jeffandrew";
+      StylistClass.Save(name);
+      StylistClass temp = StylistClass.FindById(1);
+      StylistClass name = new StylistClass("Jeffandrew");
+      name = temp;
+      Assert.IsInstanceOfType(name, typeof(StylistClass));
+    }
+
+    [TestMethod]
+    public void DeleteById_TestToDeleteStylistById_StylistList()
+    {
+      string name = "Jeffandrew";
+      List<StylistClass> tempList = new List<StylistClass> {};
+      StylistClass.Save(name);
+      List<StylistClass> secondTempList = StylistClass.GetAll();
+      int id = secondTempList[0].GetId();
+      StylistClass.Delete(id);
+      List<StylistClass> thirdTempList = StylistClass.GetAll();
+      CollectionAssert.AreEqual(tempList, thirdTempList);
+    }
+
+    [TestMethod]
   }
 }
