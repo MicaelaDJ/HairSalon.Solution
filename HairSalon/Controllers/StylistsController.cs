@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace HairSalon.Controllers
 {
-  public class StylistController : Controller
+  public class StylistsController : Controller
   {
 
     [HttpGet("/categories/{categoryId}/stylists/new")]

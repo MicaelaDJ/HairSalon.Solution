@@ -7,7 +7,6 @@ namespace HairSalon.Models
   {
     private string _name;
     // private int _id;
-    private static List<Stylist> _instances = new List<Stylist> {};
 
     public Stylist (string name)
     {
@@ -68,6 +67,11 @@ namespace HairSalon.Models
         conn.Dispose();
       }
     }
+
+    // public static Item Find(int searchId)
+    // {
+    //   return _instances[searchId-1];
+    // }    
 
   }
 }

@@ -27,7 +27,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void GetName_ReturnName_StylistNameString()
+    public void GetName_ReturnName_StylistString()
     {
       string name = "Jeffandrew";
       Stylist newStylist = new Stylist(name);
@@ -36,7 +36,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void SetName_SetStylistName_StylistNameString()
+    public void SetName_SetStylistName_StylistString()
     {
       string name = "Jeffandrew";
       Stylist newStylist = new Stylist(name);
