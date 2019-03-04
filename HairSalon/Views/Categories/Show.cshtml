@@ -1,0 +1,12 @@
+<h3>Here are all the stylists in this category:</h3>
+
+<ol>
+@foreach (var stylist in @Model["stylists"])
+{
+  <li><a href='/categories/@Model["category"].GetId()/stylists/@stylist.GetId()'>@stylist.GetName()</a></li>
+}
+</ol>
+
+<p><a href='/categories/@Model["category"].GetId()/stylists/new'>Add a new stylist</a></p>
+<p><a href='/categories'>Return to category list</a></p>
+<p><a href='/'>Return to Main Page</a></p>

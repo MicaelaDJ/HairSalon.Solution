@@ -1,15 +1,14 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
 
-namespace HairSalon.HomeControllers
+namespace HairSalon.Controllers
 {
   public class HomeController : Controller
   {
-    [Http("/")]
+    [HttpGet("/")]
     public ActionResult Index()
     {
-      return View();
+      return View(Stylist.GetAll());
     }
   }
 }

@@ -1,0 +1,8 @@
+<h1>Add a new stylist to @Model.GetDetails()</h1>
+
+<form action='/categories/@Model.GetId()/stylists' method='post'>
+  <input id='categoryId' name='categoryId' type='hidden' value='@Model.GetId()'>
+  <label for='stylistName'>Stylist description</label>
+  <input id='stylistName' name='stylistName' type='text'>
+  <button type='submit'>Add stylist</button>
+</form>

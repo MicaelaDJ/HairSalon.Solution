@@ -1,60 +1,93 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using HairSalon.Models;
-using System.IO;
+using System.Collections.Generic;
+using System;
 
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class HairSalonTest : IDisposable
+  public class StylistTest : IDisposable
   {
 
     public void Dispose()
     {
-
+      Stylist.ClearAll();
     }
 
     [TestMethod]
-    public void GetName_TestToReturnName_StylistNameString()
+    public void StylistConstructor_CreatesInstanceOfStylist_Stylist()
     {
-      StylistClass name = new StylistClass("Jeffandrew");
-      var newName = name.GetName();
-      Assert.IsInstanceOfType(newName, typeof(string));
+      Stylist newStylist = new Stylist("test");
+      Assert.AreEqual(typeof(Stylist), newStylist.GetType());
     }
 
     [TestMethod]
-    public void GetId_TestToReturnNameId_Int()
-    {
-      StylistClass name = new StylistClass("Jeffandrew");
-      var newName = name.GetId();
-      Assert.IsInstanceOfType(newName, typeof(int));
-    }
-
-    [TestMethod]
-    public void FindById_TestToReturnAListOfStylists_Stylist()
+    public void GetName_ReturnName_StylistNameString()
     {
       string name = "Jeffandrew";
-      StylistClass.Save(name);
-      StylistClass temp = StylistClass.FindById(1);
-      StylistClass name = new StylistClass("Jeffandrew");
-      name = temp;
-      Assert.IsInstanceOfType(name, typeof(StylistClass));
+      Stylist newStylist = new Stylist(name);
+      string result = newStylist.GetName();
+      Assert.AreEqual(name, result);
     }
 
     [TestMethod]
-    public void DeleteById_TestToDeleteStylistById_StylistList()
+    public void SetName_SetStylistName_StylistNameString()
     {
       string name = "Jeffandrew";
-      List<StylistClass> tempList = new List<StylistClass> {};
-      StylistClass.Save(name);
-      List<StylistClass> secondTempList = StylistClass.GetAll();
-      int id = secondTempList[0].GetId();
-      StylistClass.Delete(id);
-      List<StylistClass> thirdTempList = StylistClass.GetAll();
-      CollectionAssert.AreEqual(tempList, thirdTempList);
+      Stylist newStylist = new Stylist(name);
+      string updatedName = "Taako";
+      newStylist.SetName(updatedName);
+      string result = newStylist.GetName();
+      Assert.AreEqual(updatedName, result);
     }
 
     [TestMethod]
+    public void GetAll_ReturnsEmptyStylistList_StylistList()
+    {
+      List<Stylist> newList = new List<Stylist> { };
+      List<Stylist> result = Stylist.GetAll();
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsStylists_StylistList()
+    {
+      string name01 = "Jeffandrew";
+      string name02 = "Taako";
+      Stylist newStylist1 = new Stylist(name01);
+      Stylist newStylist2 = new Stylist(name02);
+      List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
+      List<Stylist> result = Stylist.GetAll();
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
+    public void GetId_StylistsInstantiateWithAnIdAndGetterReturns_Int()
+    {
+      string name = "Jeffandrew";
+      Stylist newStylist = new Stylist(name);
+      int result = newStylist.GetId();
+      Assert.AreEqual(1, result);
+    }
+
+    [TestMethod]
+    public void Find_ReturnsCorrectStylist_Stylist()
+    {
+      string name01 = "Jeffandrew";
+      string name02 = "Taako";
+      Stylist newStylist1 = new Stylist(name01);
+      Stylist newStylist2 = new Stylist(name02);
+      Stylist result = Stylist.Find(2);
+      Assert.AreEqual(newStylist2, result);
+    }
+
+    // [TestMethod]
+    // public void GetId_TestToReturnNameId_Int()
+    // {
+    //   StylistClass name = new StylistClass("Jeffandrew");
+    //   var newName = name.GetId();
+    //   Assert.IsInstanceOfType(newName, typeof(int));
+    // }
+
   }
 }
