@@ -14,77 +14,75 @@ namespace HairSalon.Tests
       Stylist.ClearAll();
     }
 
-    public StylistTest()
-    {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=micaela_jawor_test;";
-    }
-
     [TestMethod]
     public void StylistConstructor_CreatesInstanceOfStylist_Stylist()
     {
-      Stylist newStylist = new Stylist("test");
+      Stylist newStylist = new Stylist("test stylist");
       Assert.AreEqual(typeof(Stylist), newStylist.GetType());
     }
 
     [TestMethod]
-    public void GetName_ReturnName_StylistString()
+    public void GetName_ReturnsDetails_String()
     {
-      string name = "Jeffandrew";
-      Stylist newStylist = new Stylist(name);
-      string result = newStylist.GetName();
-      Assert.AreEqual(name, result);
+      string details = "Test Stylist";
+      Stylist newStylist = new Stylist(details);
+      string result = newStylist.GetDetails();
+      Assert.AreEqual(details, result);
     }
 
     [TestMethod]
-    public void SetName_SetStylistName_StylistString()
+    public void GetId_ReturnsStylistId_Int()
     {
-      string name = "Jeffandrew";
-      Stylist newStylist = new Stylist(name);
-      string updatedName = "Taako";
-      newStylist.SetName(updatedName);
-      string result = newStylist.GetName();
-      Assert.AreEqual(updatedName, result);
-    }
-
-    [TestMethod]
-    public void GetAll_ReturnsEmptyStylistList_StylistList()
-    {
-      List<Stylist> newList = new List<Stylist> { };
-      List<Stylist> result = Stylist.GetAll();
-      CollectionAssert.AreEqual(newList, result);
-    }
-
-    [TestMethod]
-    public void GetAll_ReturnsStylists_StylistList()
-    {
-      string name01 = "Jeffandrew";
-      string name02 = "Taako";
-      Stylist newStylist1 = new Stylist(name01);
-      Stylist newStylist2 = new Stylist(name02);
-      List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
-      List<Stylist> result = Stylist.GetAll();
-      CollectionAssert.AreEqual(newList, result);
-    }
-
-    [TestMethod]
-    public void GetId_StylistsInstantiateWithAnIdAndGetterReturns_Int()
-    {
-      string name = "Jeffandrew";
-      Stylist newStylist = new Stylist(name);
+      string details = "Test Stylist";
+      Stylist newStylist = new Stylist(details);
       int result = newStylist.GetId();
       Assert.AreEqual(1, result);
-    }
+   }
 
-    [TestMethod]
-    public void Find_ReturnsCorrectStylist_Stylist()
-    {
-      string name01 = "Jeffandrew";
-      string name02 = "Taako";
-      Stylist newStylist1 = new Stylist(name01);
-      Stylist newStylist2 = new Stylist(name02);
-      Stylist result = Stylist.Find(2);
-      Assert.AreEqual(newStylist2, result);
-    }
+   [TestMethod]
+   public void GetAll_ReturnsAllStylistObjects_StylistList()
+   {
+     string details01 = "Client";
+     string details02 = "Specialty";
+     Stylist newStylist1 = new Stylist(details01);
+     Stylist newStylist2 = new Stylist(details02);
+     List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
+     List<Stylist> result = Stylist.GetAll();
+     CollectionAssert.AreEqual(newList, result);
+   }
 
-  }
+   [TestMethod]
+   public void Find_ReturnsCorrectStylist_Stylist()
+   {
+     string details01 = "Angus";
+     string details02 = "Merle";
+     Stylist newStylist1 = new Stylist(details01);
+     Stylist newStylist2 = new Stylist(details02);
+     Stylist result = Stylist.Find(2);
+     Assert.AreEqual(newStylist2, result);
+   }
+
+   [TestMethod]
+   public void GetClients_ReturnsEmptyClientList_ClientList()
+   {
+     string details = "Angus";
+     Stylist newStylist = new Stylist(details);
+     List<Client> newList = new List<Client> { };
+     List<Client> result = newStylist.GetClients();
+     CollectionAssert.AreEqual(newList, result);
+   }
+
+   [TestMethod]
+   public void AddClient_AssociatesClientWithStylist_ClientList()
+   {
+     string name = "Jeffandrew";
+     Client newClient = new Client(name);
+     List<Client> newList = new List<Client> { newClient };
+     string details = "Client";
+     Stylist newStylist = new Stylist(details);
+     newStylist.AddClient(newClient);
+     List<Client> result = newStylist.GetClients();
+     CollectionAssert.AreEqual(newList, result);
+   }
+ }
 }

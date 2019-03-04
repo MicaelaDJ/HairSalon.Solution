@@ -24,7 +24,7 @@ namespace HairSalon.Tests
       }
 
       [TestMethod]
-      public void Index_HasCorrectModelType_StylistList()
+      public void Index_HasCorrectModelType_ClientList()
       {
         //Arrange
         ViewResult indexView = new HomeController().Index() as ViewResult;
