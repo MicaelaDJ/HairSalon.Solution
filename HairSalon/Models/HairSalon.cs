@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace HairSalon.Models
 {
@@ -37,7 +38,6 @@ namespace HairSalon.Models
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM stylists;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-
       while(rdr.Read())
       {
         int itemId = rdr.GetInt32(0);
@@ -55,15 +55,19 @@ namespace HairSalon.Models
       return allStylists;
     }
 
-    // public static void ClearAll()
-    // {
-    //   _instances.Clear();
-    // }
-    //
-    // public static Stylist Find(int searchId)
-    // {
-    //   return _instances[searchId-1];
-    // }
+    public static void ClearAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists;";
+      cmd.EexecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
 
   }
 }

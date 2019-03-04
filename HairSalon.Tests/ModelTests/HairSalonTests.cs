@@ -14,6 +14,11 @@ namespace HairSalon.Tests
       Stylist.ClearAll();
     }
 
+    public StylistTest()
+    {
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=micaela_jawor_test;";
+    }
+
     [TestMethod]
     public void StylistConstructor_CreatesInstanceOfStylist_Stylist()
     {
