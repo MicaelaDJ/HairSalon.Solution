@@ -81,13 +81,5 @@ namespace HairSalon.Tests
       Assert.AreEqual(newStylist2, result);
     }
 
-    // [TestMethod]
-    // public void GetId_TestToReturnNameId_Int()
-    // {
-    //   StylistClass name = new StylistClass("Jeffandrew");
-    //   var newName = name.GetId();
-    //   Assert.IsInstanceOfType(newName, typeof(int));
-    // }
-
   }
 }
