@@ -26,7 +26,7 @@ namespace HairSalon.Models
 
     public int GetId()
     {
-      return 0;
+      return _id;
     }
 
     public static List<Client> GetAll()
@@ -151,6 +151,5 @@ namespace HairSalon.Models
         conn.Dispose();
       }
     }
-
   }
 }
