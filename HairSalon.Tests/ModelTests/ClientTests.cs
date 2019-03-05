@@ -46,13 +46,13 @@ namespace HairSalon.Tests
       Assert.AreEqual(updatedName, result);
     }
 
-    [TestMethod]
-    public void GetAll_ReturnsEmptyClientListFromDatabase_ClientList()
-    {
-      List<Client> newList = new List<Client> { };
-      List<Client> result = Client.GetAll();
-      CollectionAssert.AreEqual(newList, result);
-    }
+    // [TestMethod]
+    // public void GetAll_ReturnsEmptyClientListFromDatabase_ClientList()
+    // {
+    //   List<Client> newList = new List<Client> { };
+    //   List<Client> result = Client.GetAll();
+    //   CollectionAssert.AreEqual(newList, result);
+    // }
 
     [TestMethod]
     public void Equals_ReturnsTrueIfNamesAreTheSame_Client()
@@ -71,18 +71,28 @@ namespace HairSalon.Tests
       List<Client> testList = new List<Client>{testClient};
       CollectionAssert.AreEqual(testList, result);
     }
-    //
-    // [TestMethod]
-    // public void GetAll_ReturnsClients_ClientList()
-    // {
-    //   string name01 = "Jeffandrew";
-    //   string name02 = "Taako";
-    //   Client newClient1 = new Client(name01);
-    //   Client newClient2 = new Client(name02);
-    //   List<Client> newList = new List<Client> { newClient1, newClient2 };
-    //   List<Client> result = Client.GetAll();
-    //   CollectionAssert.AreEqual(newList, result);
-    // }
+
+    [TestMethod]
+    public void GetAll_ReturnsEmptyClientList_ClientList()
+    {
+      List<Client> newList = new List<Client> { };
+      List<Client> result = Client.GetAll();
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsClients_ClientList()
+    {
+      string name01 = "Jeffandrew";
+      string name02 = "Taako";
+      Client newClient1 = new Client(name01);
+      newClient1.Save();
+      Client newClient2 = new Client(name02);
+      newClient2.Save();
+      List<Client> newList = new List<Client> { newClient1, newClient2 };
+      List<Client> result = Client.GetAll();
+      CollectionAssert.AreEqual(newList, result);
+    }
     //
     // [TestMethod]
     // public void GetId_ClientsInstantiateWithAnIdAndGetterReturns_Int()
