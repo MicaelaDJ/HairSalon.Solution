@@ -1,6 +1,6 @@
 # _Hair Salon_
 
-#### _An MVC web application for a hair salon, Created 3/1/19_
+#### _An MVC web application for a hair salon, Created 3/1/19, Updated 3/4/19, 3/5/19_
 
 #### By _**Micaela Jawor**_
 
