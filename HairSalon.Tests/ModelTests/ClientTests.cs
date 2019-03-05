@@ -29,60 +29,44 @@ namespace HairSalon.Tests
     [TestMethod]
     public void GetName_ReturnName_ClientString()
     {
+      //Arrange
       string name = "Jeffandrew";
       Client newClient = new Client(name);
+      //Act
       string result = newClient.GetName();
+      //Assert
       Assert.AreEqual(name, result);
     }
 
     [TestMethod]
     public void SetName_SetClientName_ClientString()
     {
+      //Arrange
       string name = "Jeffandrew";
       Client newClient = new Client(name);
+      //Act
       string updatedName = "Taako";
       newClient.SetName(updatedName);
       string result = newClient.GetName();
+      //Assert
       Assert.AreEqual(updatedName, result);
-    }
-
-    // [TestMethod]
-    // public void GetAll_ReturnsEmptyClientListFromDatabase_ClientList()
-    // {
-    //   List<Client> newList = new List<Client> { };
-    //   List<Client> result = Client.GetAll();
-    //   CollectionAssert.AreEqual(newList, result);
-    // }
-
-    [TestMethod]
-    public void Equals_ReturnsTrueIfNamesAreTheSame_Client()
-    {
-      Client firstClient = new Client("Jeffandrew");
-      Client secondClient = new Client("Jeffandrew");
-      Assert.AreEqual(firstClient, secondClient);
-    }
-
-    [TestMethod]
-    public void Save_SavesToDatabase_ClientList()
-    {
-      Client testClient = new Client("Jeffandrew");
-      testClient.Save();
-      List<Client> result = Client.GetAll();
-      List<Client> testList = new List<Client>{testClient};
-      CollectionAssert.AreEqual(testList, result);
     }
 
     [TestMethod]
     public void GetAll_ReturnsEmptyClientList_ClientList()
     {
+      //Arrange
       List<Client> newList = new List<Client> { };
+      //Act
       List<Client> result = Client.GetAll();
+      //Assert
       CollectionAssert.AreEqual(newList, result);
     }
 
     [TestMethod]
     public void GetAll_ReturnsClients_ClientList()
     {
+      //Arrange
       string name01 = "Jeffandrew";
       string name02 = "Taako";
       Client newClient1 = new Client(name01);
@@ -90,48 +74,85 @@ namespace HairSalon.Tests
       Client newClient2 = new Client(name02);
       newClient2.Save();
       List<Client> newList = new List<Client> { newClient1, newClient2 };
+      //Act
       List<Client> result = Client.GetAll();
+      //Assert
       CollectionAssert.AreEqual(newList, result);
     }
 
-    [TestMethod]
-    public void Save_AssignsIdToObject_Id()
-    {
-      Client testClient = new Client("Jeffandrew");
-      testClient.Save();
-      Client savedClient = Client.GetAll()[0];
-      int result = savedClient.GetId();
-      int testId = testClient.GetId();
-      Assert.AreEqual(testId, result);
-    }
-    //
     // [TestMethod]
     // public void GetId_ClientsInstantiateWithAnIdAndGetterReturns_Int()
     // {
+    //   //Arrange
     //   string name = "Jeffandrew";
     //   Client newClient = new Client(name);
+    //   //Act
     //   int result = newClient.GetId();
+    //   //
     //   Assert.AreEqual(1, result);
     // }
 
     [TestMethod]
     public void Find_ReturnsCorrectClientFromDatabase_Client()
     {
+      //Arrange
       Client testClient = new Client("Jeffandrew");
       testClient.Save();
+      //Act
       Client foundClient = Client.Find(testClient.GetId());
+      //Assert
       Assert.AreEqual(testClient, foundClient);
+    }
+
+    [TestMethod]
+    public void Equals_ReturnsTrueIfNamesAreTheSame_Client()
+    {
+      //Arrange, Act
+      Client firstClient = new Client("Jeffandrew");
+      Client secondClient = new Client("Jeffandrew");
+      //Assert
+      Assert.AreEqual(firstClient, secondClient);
+    }
+
+    [TestMethod]
+    public void Save_SavesToDatabase_ClientList()
+    {
+      //Arrange
+      Client testClient = new Client("Jeffandrew");
+      //Act
+      testClient.Save();
+      List<Client> result = Client.GetAll();
+      List<Client> testList = new List<Client>{testClient};
+      //Assert
+      CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Save_AssignsIdToObject_Id()
+    {
+      //Arrange
+      Client testClient = new Client("Jeffandrew");
+      //Act
+      testClient.Save();
+      Client savedClient = Client.GetAll()[0];
+      int result = savedClient.GetId();
+      int testId = testClient.GetId();
+      //Assert
+      Assert.AreEqual(testId, result);
     }
 
     [TestMethod]
     public void Edit_UpdatesClientInDatabase_String()
     {
+      //Arrange
       string firstName = "Jeffandrew";
-      Client testClient = new Client(firstName);
+      Client testClient = new Client("Jeffandrew");
       testClient.Save();
       string secondName = "Taako";
+      //Act
       testClient.Edit(secondName);
       string result = Client.Find(testClient.GetId()).GetName();
+      //Assert
       Assert.AreEqual(secondName, result);
     }
 

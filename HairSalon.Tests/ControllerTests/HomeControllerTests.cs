@@ -33,7 +33,7 @@ namespace HairSalon.Tests
         var result = indexView.ViewData.Model;
 
         //Assert
-        Assert.IsInstanceOfType(result, typeof(List<Stylist>));
+        Assert.IsInstanceOfType(result, typeof(List<Client>));
       }
 
     }
