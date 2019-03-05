@@ -6,12 +6,12 @@ namespace HairSalon.Models
   public class Client
   {
     private string _name;
-    // private int _id;
+    private int _id;
 
-    public Client (string name)
+    public Client (string name, int id = 0)
     {
       _name = name;
-      // _id = _instances.Count;
+      _id = id;
     }
 
     public string GetName()
@@ -41,7 +41,7 @@ namespace HairSalon.Models
       {
         int clientId = rdr.GetInt32(0);
         string clientName = rdr.GetString(1);
-        Client newClient = new Client(clientName);
+        Client newClient = new Client(clientName, clientId);
         allClients.Add(newClient);
       }
 
@@ -83,8 +83,9 @@ namespace HairSalon.Models
       else
       {
         Client newClient = (Client) otherClient;
+        bool idEquality = (this.GetId() == newClient.GetId());
         bool nameEquality = (this.GetName() == newClient.GetName());
-        return (nameEquality);
+        return (idEquality && nameEquality);
       }
     }
 
@@ -99,7 +100,7 @@ namespace HairSalon.Models
       name.Value = this._name;
       cmd.Parameters.Add(name);
       cmd.ExecuteNonQuery();
-
+      _id = (int)cmd.LastInsertedId;
       conn.Close();
       if (conn != null)
       {
