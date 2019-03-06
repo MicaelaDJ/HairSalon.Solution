@@ -16,6 +16,7 @@ namespace HairSalon.Tests
     public void Dispose()
     {
       Stylist.ClearAll();
+      Client.ClearAll();
     }
 
     [TestMethod]
@@ -48,35 +49,35 @@ namespace HairSalon.Tests
    //    //Assert
    //    Assert.AreEqual(1, result);
    // }
-   //
-   // [TestMethod]
-   // public void GetAll_ReturnsAllStylistObjects_StylistList()
-   // {
-   //   //Arrange
-   //   string details01 = "Client";
-   //   string details02 = "Specialty";
-   //   Stylist newStylist1 = new Stylist(details01);
-   //   Stylist newStylist2 = new Stylist(details02);
-   //   List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
-   //   //Act
-   //   List<Stylist> result = Stylist.GetAll();
-   //   //Assert
-   //   CollectionAssert.AreEqual(newList, result);
-   // }
-   //
-   // [TestMethod]
-   // public void Find_ReturnsCorrectStylist_Stylist()
-   // {
-   //   //Arrange
-   //   string details01 = "Client";
-   //   string details02 = "Specialty";
-   //   Stylist newStylist1 = new Stylist(details01);
-   //   Stylist newStylist2 = new Stylist(details02);
-   //   //Act
-   //   Stylist result = Stylist.Find(2);
-   //   //Assert
-   //   Assert.AreEqual(newStylist2, result);
-   // }
+
+   [TestMethod]
+   public void GetAll_ReturnsAllStylistObjects_StylistList()
+   {
+     //Arrange
+     string details01 = "Client";
+     string details02 = "Specialty";
+     Stylist newStylist1 = new Stylist(details01);
+     newStylist1.Save();
+     Stylist newStylist2 = new Stylist(details02);
+     newStylist2.Save();
+     List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
+     //Act
+     List<Stylist> result = Stylist.GetAll();
+     //Assert
+     CollectionAssert.AreEqual(newList, result);
+   }
+
+   [TestMethod]
+   public void Find_ReturnsStylistInDatabse_Stylist()
+   {
+     //Arrange
+     Stylist testStylist = new Stylist("Karri S.");
+     testStylist.Save();
+     //Act
+     Stylist foundStylist = Stylist.Find(testStylist.GetId());
+     //Assert
+     Assert.AreEqual(testStylist, foundStylist);
+   }
 
    [TestMethod]
    public void GetClients_ReturnsEmptyClientList_ClientList()
@@ -85,22 +86,6 @@ namespace HairSalon.Tests
      string details = "Clients";
      Stylist newStylist = new Stylist(details);
      List<Client> newList = new List<Client> { };
-     //Act
-     List<Client> result = newStylist.GetClients();
-     //Assert
-     CollectionAssert.AreEqual(newList, result);
-   }
-
-   [TestMethod]
-   public void AddClient_AssociatesClientWithStylist_ClientList()
-   {
-     //Arrange
-     string name = "Jeffandrew";
-     Client newClient = new Client(name, 1);
-     List<Client> newList = new List<Client> { newClient };
-     string details = "Client";
-     Stylist newStylist = new Stylist(details);
-     newStylist.AddClient(newClient);
      //Act
      List<Client> result = newStylist.GetClients();
      //Assert
@@ -138,5 +123,37 @@ namespace HairSalon.Tests
      //Assert
      CollectionAssert.AreEqual(testList, result);
    }
+
+   [TestMethod]
+   public void Save_DatabaseAssignsIdToStylist_Id()
+   {
+     //Arrange
+     Stylist testStylist = new Stylist("Karri S.");
+     testStylist.Save();
+     //Act
+     Stylist savedStylist = Stylist.GetAll()[0];
+
+     int result = savedStylist.GetId();
+     int testId = testStylist.GetId();
+     //Assert
+     Assert.AreEqual(testId, result);
+   }
+
+   [TestMethod]
+   public void GetClients_RetievesAllClientsWithStylist_ClientList()
+   {
+     //Arrange, Act
+     Stylist testStylist = new Stylist("Karri S.");
+     testStylist.Save();
+     Client firstClient = new Client("Jeffandrew", testStylist.GetId());
+     firstClient.Save();
+     Client secondClient = new Client("Taako", testStylist.GetId());
+     secondClient.Save();
+     List<Client> testClientList = new List<Client> {firstClient, secondClient};
+     List<Client> resultClientList = testStylist.GetClients();
+     //Assert
+     CollectionAssert.AreEqual(testClientList, resultClientList);
+   }
+
  }
 }
