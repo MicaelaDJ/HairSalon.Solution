@@ -38,7 +38,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM categories;";
+      cmd.CommandText = @"DELETE FROM stylists;";
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
@@ -53,7 +53,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM categories;";
+      cmd.CommandText = @"SELECT * FROM stylists;";
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -78,6 +78,25 @@ namespace HairSalon.Models
     public List<Client> GetClients()
     {
       return _clients;
+    }
+
+    public override bool Equals(System.Object otherStylist)
+    {
+      if (!(otherStylist is Stylist))
+      {
+        return false;
+      }
+      else
+      {
+        Stylist newStylist = (Stylist) otherStylist;
+        bool detailsEquality = this.GetDetails().Equals(newStylist.GetDetails());
+        return detailsEquality;
+      }
+    }
+
+    public void Save()
+    {
+      
     }
 
   }
