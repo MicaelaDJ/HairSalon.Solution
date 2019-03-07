@@ -55,14 +55,5 @@ namespace HairSalon.Controllers
       return View ("Show", model);
     }
 
-    // [HttpPost("/stylists/{stylistId}/clients")]
-    // public ActionResult Create(string clientName)
-    // {
-    //   Client newClient = new Client(clientName);
-    //   newClient.Save();
-    //   List<Client> allClients = Client.GetAll();
-    //   return View("Index", allClients);
-    // }
-
   }
 }
