@@ -10,19 +10,30 @@ namespace HairSalon.Tests
     public class ClientControllerTest
     {
 
+      [TestMethod]
+      public void CreateClient_ReturnsCorrectClientsView_True()
+      {
+        //Arrange
+        ClientsController controller = new ClientsController();
+
+        //Act
+        ActionResult indexView = controller.New(1);
+
+        //Assert
+        Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+      }
+
+
       // [TestMethod]
-      // public void Create_ReturnsCorrectActionType_RedirectToActionResult()
+      // public void Create_ReturnsCorrectModelType_ClientsList()
       // {
-      //   //Arrange
+      //   //Arrange, Act
       //   ClientsController controller = new ClientsController();
       //
-      //   //Act
-      //   IActionResult view = controller.Create("Jeffandrew");
-      //
       //   //Assert
-      //   Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
+      //   Assert.IsInstanceOfType(controller.New(), typeof(ViewResult));
       // }
-      //
+
       // [TestMethod]
       // public void Create_RedirectsToCorrectAction_Index()
       // {
