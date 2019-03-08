@@ -105,7 +105,7 @@ namespace HairSalon.Models
         Client newClient = (Client) otherClient;
         bool idEquality = this.GetId() == newClient.GetId();
         bool nameEquality = this.GetName() == newClient.GetName();
-        return (idEquality && nameEquality && stylistEquality);
+        return (idEquality && nameEquality);
       }
     }
 
@@ -150,5 +150,17 @@ namespace HairSalon.Models
         conn.Dispose();
       }
     }
+
+    public List<Stylist> GetStylists()
+    {
+      List<Stylist> stylists = new List<Stylist> {};
+      return stylists;
+    }
+
+    public void AddStylist(Stylist newStylist)
+    {
+      
+    }
+
   }
 }
