@@ -140,7 +140,7 @@ namespace HairSalon.Tests
    }
 
    [TestMethod]
-   public void GetClients_RetievesAllClientsWithStylist_ClientList()
+   public void GetClients_ReturnsAllStylistClients_ClientList()
    {
      //Arrange
      Stylist testStylist = new Stylist("Karri S.");

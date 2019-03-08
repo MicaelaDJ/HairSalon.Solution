@@ -235,5 +235,10 @@ namespace HairSalon.Models
       }
     }
 
+    public override int GetHashCode()
+    {
+      return this.GetId().GetHashCode();
+    }
+
   }
 }

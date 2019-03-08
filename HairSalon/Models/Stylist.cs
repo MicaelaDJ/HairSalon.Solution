@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using System;
+// using System;
 
 namespace HairSalon.Models
 {
@@ -8,30 +8,11 @@ namespace HairSalon.Models
   {
     private string _details;
     private int _id;
+
     public Stylist(string stylistDetails, int id = 0)
     {
       _details = stylistDetails;
       _id = id;
-    }
-
-    public override bool Equals(System.Object otherStylist)
-    {
-      if (!(otherStylist is Stylist))
-      {
-        return false;
-      }
-      else
-      {
-        Stylist newStylist = (Stylist) otherStylist;
-        bool idEquality = this.GetId().Equals(newStylist.GetId());
-        bool detailsEquality = this.GetDetails().Equals(newStylist.GetDetails());
-        return (idEquality && detailsEquality);
-      }
-    }
-
-    public override int GetHashCode()
-    {
-      return this.GetId().GetHashCode();
     }
 
     public string GetDetails()
@@ -44,21 +25,13 @@ namespace HairSalon.Models
       return _id;
     }
 
-    public void Save()
+    public static void ClearAll()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists (details) VALUES (@details);";
-
-      MySqlParameter name = new MySqlParameter();
-      name.ParameterName = "@details";
-      name.Value = this._details;
-      cmd.Parameters.Add(name);
-
+      cmd.CommandText = @"DELETE FROM stylists;";
       cmd.ExecuteNonQuery();
-      _id = (int) cmd.LastInsertedId;
       conn.Close();
       if (conn != null)
       {
@@ -116,20 +89,6 @@ namespace HairSalon.Models
       return newStylist;
     }
 
-    public static void ClearAll()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylists;";
-      cmd.ExecuteNonQuery();
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-    }
-
     public List<Client> GetClients()
     {
       MySqlConnection conn = DB.Connection();
@@ -141,7 +100,7 @@ namespace HairSalon.Models
       stylistIdParameter.Value = _id;
       cmd.Parameters.Add(stylistIdParameter);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      List<int> clinetIds = new List<int> {};
+      List<int> clientIds = new List<int> {};
       while(rdr.Read())
       {
         int clientId = rdr.GetInt32(0);
@@ -161,11 +120,11 @@ namespace HairSalon.Models
         while (clientQueryRdr.Read())
         {
           int thisClientId = clientQueryRdr.GetInt32(0);
-          string clinetName = clientQueryRdr.GetString(1);
+          string clientName = clientQueryRdr.GetString(1);
           Client foundClient = new Client(clientName, thisClientId);
-          clinets.Add(foundClient);
+          clients.Add(foundClient);
         }
-        itemQueryRdr.Dispose();
+        clientQueryRdr.Dispose();
       }
       conn.Close();
       if (conn != null)
@@ -173,6 +132,40 @@ namespace HairSalon.Models
         conn.Dispose();
       }
       return clients;
+    }
+
+    public override bool Equals(System.Object otherStylist)
+    {
+      if (!(otherStylist is Stylist))
+      {
+        return false;
+      }
+      else
+      {
+        Stylist newStylist = (Stylist) otherStylist;
+        bool idEquality = this.GetId().Equals(newStylist.GetId());
+        bool detailsEquality = this.GetDetails().Equals(newStylist.GetDetails());
+        return (idEquality && detailsEquality);
+      }
+    }
+
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO stylists (details) VALUES (@details);";
+      MySqlParameter name = new MySqlParameter();
+      name.ParameterName = "@details";
+      name.Value = this._details;
+      cmd.Parameters.Add(name);
+      cmd.ExecuteNonQuery();
+      _id = (int) cmd.LastInsertedId;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
 
     public void Delete()
@@ -211,6 +204,11 @@ namespace HairSalon.Models
       {
         conn.Dispose();
       }
+    }
+
+    public override int GetHashCode()
+    {
+      return this.GetId().GetHashCode();
     }
 
   }

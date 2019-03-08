@@ -23,7 +23,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void ClientConstructor_CreatesInstanceOfClient_Client()
     {
-      Client newClient = new Client("test", 1);
+      Client newClient = new Client("test");
       Assert.AreEqual(typeof(Client), newClient.GetType());
     }
 
@@ -190,7 +190,7 @@ namespace HairSalon.Tests
       Client testClient = new Client(testName);
       testClient.Save();
       //Act
-      testClient.AddCategory(testStylist);
+      testClient.AddStylist(testStylist);
       testClient.Delete();
       List<Client> resultStylistClients = testStylist.GetClients();
       List<Client> testStylistClients = new List<Client> {};
