@@ -93,38 +93,23 @@ namespace HairSalon.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT client_id FROM stylists_clients WHERE stylist_id = @Stylist_id;";
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT clients.* FROM stylists
+          JOIN stylists_clients ON (stylists.id = stylists_clients.stylist_id)
+          JOIN clients ON (stylists_clients.client_id = clients.id)
+          WHERE stylists.id = @StylistId;";
       MySqlParameter stylistIdParameter = new MySqlParameter();
       stylistIdParameter.ParameterName = "@StylistId";
       stylistIdParameter.Value = _id;
       cmd.Parameters.Add(stylistIdParameter);
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      List<int> clientIds = new List<int> {};
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      List<Client> clients = new List<Client> {};
       while(rdr.Read())
       {
         int clientId = rdr.GetInt32(0);
-        clientIds.Add(clientId);
-      }
-      rdr.Dispose();
-      List<Client> clients = new List<Client> {};
-      foreach (int clientId in clientIds)
-      {
-        var clientQuery = conn.CreateCommand() as MySqlCommand;
-        clientQuery.CommandText = @"SELECT * FROM clients WHERE id = @ClientId;";
-        MySqlParameter clientIdParameter = new MySqlParameter();
-        clientIdParameter.ParameterName = "@ClientId";
-        clientIdParameter.Value = clientId;
-        clientQuery.Parameters.Add(clientIdParameter);
-        var clientQueryRdr = clientQuery.ExecuteReader() as MySqlDataReader;
-        while (clientQueryRdr.Read())
-        {
-          int thisClientId = clientQueryRdr.GetInt32(0);
-          string clientName = clientQueryRdr.GetString(1);
-          Client foundClient = new Client(clientName, thisClientId);
-          clients.Add(foundClient);
-        }
-        clientQueryRdr.Dispose();
+        string clientName = rdr.GetString(1);
+        Client newClient = new Client(clientName, clientId);
+        clients.Add(newClient);
       }
       conn.Close();
       if (conn != null)
