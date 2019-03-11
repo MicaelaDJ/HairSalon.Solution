@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 06, 2019 at 10:30 PM
+-- Generation Time: Mar 11, 2019 at 10:00 PM
 -- Server version: 5.7.24-log
 -- PHP Version: 7.2.10
 
@@ -32,9 +32,16 @@ USE `micaela_jawor`;
 
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `stylist_id` int(11) DEFAULT NULL
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`id`, `name`) VALUES
+(6, 'hi'),
+(7, 'nsefkjnse');
 
 -- --------------------------------------------------------
 
@@ -45,6 +52,29 @@ CREATE TABLE `clients` (
 CREATE TABLE `stylists` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `details` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `stylists`
+--
+
+INSERT INTO `stylists` (`id`, `details`) VALUES
+(1, 'karri'),
+(2, 'kjnaskjdn'),
+(3, 'taako'),
+(4, 'Haley'),
+(5, 'hi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stylist_clients`
+--
+
+CREATE TABLE `stylist_clients` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `stylist_id` int(11) DEFAULT NULL,
+  `client_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -65,6 +95,13 @@ ALTER TABLE `stylists`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `stylist_clients`
+--
+ALTER TABLE `stylist_clients`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -72,12 +109,18 @@ ALTER TABLE `stylists`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `stylists`
 --
 ALTER TABLE `stylists`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `stylist_clients`
+--
+ALTER TABLE `stylist_clients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
