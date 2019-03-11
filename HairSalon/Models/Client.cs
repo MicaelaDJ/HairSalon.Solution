@@ -155,38 +155,23 @@ namespace HairSalon.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT stylist_id FROM stylists_clients WHERE client_id = @clientId;";
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT stylists.* FROM clients
+          JOIN stylists_clients ON (clients.id = stylists_clients.client_id)
+          JOIN stylists ON (stylists_clients.stylist_id = stylist.id)
+          WHERE clients.id = @ClientId;";
       MySqlParameter clientIdParameter = new MySqlParameter();
-      clientIdParameter.ParameterName = "@clientId";
+      clientIdParameter.ParameterName = "@ClientId";
       clientIdParameter.Value = _id;
       cmd.Parameters.Add(clientIdParameter);
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      List<int> stylistIds = new List<int> {};
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      List<Stylist> stylists = new List<Stylist>{};
       while (rdr.Read())
       {
         int stylistId = rdr.GetInt32(0);
-        stylistIds.Add(stylistId);
-      }
-      rdr.Dispose();
-      List<Stylist> stylists = new List<Stylist> {};
-      foreach (int stylistId in stylistIds)
-      {
-        var stylistQuery = conn.CreateCommand() as MySqlCommand;
-        stylistQuery.CommandText = @"SELECT * FROM stylists WHERE id = @StylistId;";
-        MySqlParameter stylistIdParameter = new MySqlParameter();
-        stylistIdParameter.ParameterName = "@StylistId";
-        stylistIdParameter.Value = stylistId;
-        stylistQuery.Parameters.Add(stylistIdParameter);
-        var stylistQueryRdr = stylistQuery.ExecuteReader() as MySqlDataReader;
-        while(stylistQueryRdr.Read())
-        {
-          int thisStylistId = stylistQueryRdr.GetInt32(0);
-          string stylistDetails = stylistQueryRdr.GetString(1);
-          Stylist foundStylist = new Stylist(stylistDetails, thisStylistId);
-          stylists.Add(foundStylist);
-        }
-        stylistQueryRdr.Dispose();
+        string stylistName = rdr.GetString(1)
+        Stylist newStylist = new Stylist(stylistName, stylistId);
+        stylists.Add(newStylist);
       }
       conn.Close();
       if (conn != null)
