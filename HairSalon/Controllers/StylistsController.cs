@@ -15,21 +15,21 @@ namespace HairSalon.Controllers
       return View(allStylists);
     }
 
-    // [HttpGet("/stylists/new")]
-    // public ActionResult New()
-    // {
-    //   return View();
-    // }
-    //
-    // [HttpPost("/stylists")]
-    // public ActionResult Create(string stylistDetails)
-    // {
-    //   Stylist newStylist = new Stylist(stylistDetails);
-    //   newStylist.Save();
-    //   List<Stylist> allStylists = Stylist.GetAll();
-    //   return View("Index", allStylists);
-    // }
-    //
+    [HttpGet("/stylists/new")]
+    public ActionResult New()
+    {
+      return View();
+    }
+
+    [HttpPost("/stylists")]
+    public ActionResult Create(string stylistDetails)
+    {
+      Stylist newStylist = new Stylist(stylistDetails);
+      newStylist.Save();
+      List<Stylist> allStylists = Stylist.GetAll();
+      return View("Index", allStylists);
+    }
+
     // [HttpGet("/stylists/{id}")]
     // public ActionResult Show(int id)
     // {
