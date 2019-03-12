@@ -36,7 +36,7 @@ namespace HairSalon.Controllers
       Client selectedClient = Client.Find(id);
       List<Stylist> clientStylists = selectedClient.GetStylists();
       List<Stylist> allStylists = Stylist.GetAll();
-      model.Add("selectedClient", selectedClient);
+      model.Add("client", selectedClient);
       model.Add("clientStylists", clientStylists);
       model.Add("allStylists", allStylists);
       return View(model);
@@ -51,7 +51,7 @@ namespace HairSalon.Controllers
       return RedirectToAction("Show", new { id = clientId });
     }
 
-    [HttpGet("/clients/delete")]
+    [HttpGet("/clients/{id}delete")]
     public ActionResult Delete(int id)
     {
       Client client = Client.Find(id);

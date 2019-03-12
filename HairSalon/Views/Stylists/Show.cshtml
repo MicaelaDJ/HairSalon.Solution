@@ -8,7 +8,7 @@
 {
   <h4>Here are all of the clients for this stylist:</h4>
   <ul>
-    @foreach (var client in @Model["stylistClients"])
+    @foreach (Client client in @Model["stylistClients"])
     {
       <li>@client.GetName()</li>
     }
