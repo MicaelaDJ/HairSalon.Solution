@@ -63,8 +63,8 @@ namespace HairSalon.Controllers
     public ActionResult Delete()
     {
       Client.DeleteAll();
-      List<Client> allClients = Client.GetAll();
-      return RedirectToAction("Index", allClients);
+      // List<Client> allClients = Client.GetAll();
+      return RedirectToAction("Index");
     }
 
     [HttpGet("/stylists/{stylistId}/client/{clientId}/edit")]

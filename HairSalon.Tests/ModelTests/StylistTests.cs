@@ -157,23 +157,23 @@ namespace HairSalon.Tests
      CollectionAssert.AreEqual(testList, savedClients);
    }
 
-   [TestMethod]
-   public void Delete_DeletesStylistAssociationsFromDatabase_StylistList()
-   {
-     //Arrange
-     Client testClient = new Client("Jeffandrew");
-     testClient.Save();
-     string testDetails = "Karri S.";
-     Stylist testStylist = new Stylist(testDetails);
-     testStylist.Save();
-     //Act
-     testStylist.AddClient(testClient);
-     testStylist.Delete();
-     List<Stylist> resultClientStylists = testClient.GetStylists();
-     List<Stylist> testClientStylists = new List<Stylist> {};
-     //Assert
-     CollectionAssert.AreEqual(testClientStylists, resultClientStylists);
-   }
+   // [TestMethod]
+   // public void Delete_DeletesStylistAssociationsFromDatabase_StylistList()
+   // {
+   //   //Arrange
+   //   Client testClient = new Client("Jeffandrew");
+   //   testClient.Save();
+   //   string testDetails = "Karri S.";
+   //   Stylist testStylist = new Stylist(testDetails);
+   //   testStylist.Save();
+   //   //Act
+   //   testStylist.AddClient(testClient);
+   //   testStylist.Delete();
+   //   List<Stylist> resultClientStylists = testClient.GetStylists();
+   //   List<Stylist> testClientStylists = new List<Stylist> {};
+   //   //Assert
+   //   CollectionAssert.AreEqual(testClientStylists, resultClientStylists);
+   // }
 
    [TestMethod]
    public void Test_AddClient_AddsClientToStylist()

@@ -17,7 +17,7 @@ namespace HairSalon.Tests
         ClientsController controller = new ClientsController();
 
         //Act
-        ActionResult indexView = controller.New(1);
+        ActionResult indexView = controller.New();
 
         //Assert
         Assert.IsInstanceOfType(indexView, typeof(ViewResult));
