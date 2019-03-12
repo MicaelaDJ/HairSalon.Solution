@@ -95,8 +95,8 @@ namespace HairSalon.Models
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT clients.* FROM stylists
-          JOIN stylists_clients ON (stylists.id = stylists_clients.stylist_id)
-          JOIN clients ON (stylists_clients.client_id = clients.id)
+          JOIN stylist_clients ON (stylists.id = stylist_clients.stylist_id)
+          JOIN clients ON (stylist_clients.client_id = clients.id)
           WHERE stylists.id = @StylistId;";
       MySqlParameter stylistIdParameter = new MySqlParameter();
       stylistIdParameter.ParameterName = "@StylistId";
@@ -157,16 +157,26 @@ namespace HairSalon.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-      MySqlCommand cmd = new MySqlCommand("DELETE FROM sttlists WHERE id = @StylistId; DELETE FROM stylists_clients WHERE stylist_id = @StylistId;", conn);
-      MySqlParameter stylistIdParameter = new MySqlParameter();
-      stylistIdParameter.ParameterName = "@StylistId";
-      stylistIdParameter.Value = this.GetId();
-      cmd.Parameters.Add(stylistIdParameter);
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylist WHERE id = (@searchId);";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = this._id;
+      cmd.Parameters.Add(searchId);
       cmd.ExecuteNonQuery();
+      conn.Close();
       if (conn != null)
       {
-        conn.Close();
+        conn.Dispose();
       }
+    }
+
+    public static void DeleteAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists";
     }
 
     public void AddClient(Client newClient)
@@ -174,7 +184,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists_clients (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
+      cmd.CommandText = @"INSERT INTO stylist_clients (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
       MySqlParameter stylist_id = new MySqlParameter();
       stylist_id.ParameterName = "@StylistId";
       stylist_id.Value = _id;
