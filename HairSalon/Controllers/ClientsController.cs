@@ -51,7 +51,7 @@ namespace HairSalon.Controllers
       return RedirectToAction("Show", new { id = clientId });
     }
 
-    [HttpGet("/clients/{id}delete")]
+    [HttpGet("/clients/{id}/delete")]
     public ActionResult Delete(int id)
     {
       Client client = Client.Find(id);
