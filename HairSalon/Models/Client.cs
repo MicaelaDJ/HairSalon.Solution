@@ -12,6 +12,7 @@ namespace HairSalon.Models
     {
       _name = name;
       _id = id;
+
     }
 
     public string GetName()
@@ -28,6 +29,8 @@ namespace HairSalon.Models
     {
       return _id;
     }
+
+
 
     public static List<Client> GetAll()
     {

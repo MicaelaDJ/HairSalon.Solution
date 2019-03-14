@@ -20,6 +20,11 @@ namespace HairSalon.Models
       return _details;
     }
 
+    public void SetDetails(string newDetails)
+    {
+      _details = newDetails;
+    }
+
     public int GetId()
     {
       return _id;
@@ -200,6 +205,29 @@ namespace HairSalon.Models
       client_id.Value = newClient.GetId();
       cmd.Parameters.Add(client_id);
       cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public void Edit(string newDetails)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE stylists SET name = (@stylistDetails) WHERE id = (@stylistId);";
+      MySqlParameter stylistNameParameter = new MySqlParameter();
+      stylistNameParameter.ParameterName = "@stylistDetails";
+      stylistNameParameter.Value = newDetails;
+      cmd.Parameters.Add(stylistNameParameter);
+      MySqlParameter stylistIdParameter = new MySqlParameter();
+      stylistIdParameter.ParameterName = "@stylistId";
+      stylistIdParameter.Value = this._id;
+      cmd.Parameters.Add(stylistIdParameter);
+      cmd.ExecuteNonQuery();
+      _details = newDetails;
       conn.Close();
       if (conn != null)
       {

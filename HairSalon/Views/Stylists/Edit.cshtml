@@ -1,0 +1,17 @@
+@using HairSalon.Models;
+
+<h1>Hair Salon</h1>
+<hr>
+
+<h2>Edit stylist: @Model.GetDetails()</h2>
+
+<form action="/stylists/@Model.GetId()/edit" method="post">
+  <label for "stylistDetails">Stylist name</label>
+  <input type="text" id="stylistDetails" name="stylistDetails">
+  <button type="submit">Update</button>
+</form>
+
+
+
+<h4><a href="/stylists">Go Back to stylists</a></p>
+<h4><a href="/">Return to the home page</a></h4>
