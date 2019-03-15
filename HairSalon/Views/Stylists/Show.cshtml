@@ -15,6 +15,17 @@
   </ul>
 }
 
+@if (@Model["stylistSpecialties"].Count != 0)
+{
+  <h4>Here are all of the specialties for this stylist:</h4>
+  <ul>
+    @foreach (Spacialty specialty in @Model["stylistSpecialties"])
+    {
+      <li>@specialty.GetName()</li>
+    }
+  </ul>
+}
+
 <h4>Add a client to this stylist:</h4>
 
 <form action='/stylists/@Model["stylist"].GetId()/clients/new' method='post'>
@@ -24,6 +35,21 @@
     @foreach (var client in @Model["allClients"])
     {
       <option value='@client.GetId()'>@client.GetName()</option>
+    }
+
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<h4>Add a specialty to this stylist:</h4>
+
+<form action='/stylists/@Model["stylist"].GetId()/specialties/new' method='post'>
+  <label for='specialtyId'>Select a specialty</label>
+  <select id='specialtyId' name='specialtyId' type='text'>
+
+    @foreach (var client in @Model["allSpecialties"])
+    {
+      <option value='@specialty.GetId()'>@specialty.GetName()</option>
     }
 
   </select>
