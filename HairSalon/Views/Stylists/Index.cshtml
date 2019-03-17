@@ -7,7 +7,7 @@
   <ul>
     @foreach (var stylist in Model)
     {
-    <li><a href="/stylists/@stylist.GetId()">@stylist.GetDetails()</a></li>
+    <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a></li>
     }
   </ul>
 }

@@ -3,11 +3,11 @@
 <h1>Hair Salon</h1>
 <hr>
 
-<h2>Edit stylist: @Model.GetDetails()</h2>
+<h2>Edit stylist: @Model.GetName()</h2>
 
 <form action="/stylists/@Model.GetId()/edit" method="post">
-  <label for "stylistDetails">Stylist name</label>
-  <input type="text" id="stylistDetails" name="stylistDetails">
+  <label for "stylistName">Stylist name</label>
+  <input type="text" id="stylistName" name="stylistName">
   <button type="submit">Update</button>
 </form>
 

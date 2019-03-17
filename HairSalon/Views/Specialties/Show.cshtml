@@ -10,7 +10,7 @@
   <ul>
     @foreach (Stylist stylist in @Model["specialtyStylists"])
     {
-      <li>@stylist.GetDetails()</li>
+      <li>@stylist.GetName()</li>
     }
   </ul>
 }
@@ -23,7 +23,7 @@
 
     @foreach (var stylist in @Model["allStylists"])
     {
-      <option value='@stylist.GetId()'>@stylist.GetDetails()</option>
+      <option value='@stylist.GetId()'>@stylist.GetName()</option>
     }
   </select>
   <button type='submit'>Add</button>
