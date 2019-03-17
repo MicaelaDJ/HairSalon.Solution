@@ -14,7 +14,17 @@ A program (using C#) that allows the owner of a salon to add a list of the styli
 * As an employee, I need to be able to select a stylist, see their details, and see a list of all clients that belong to that stylist.
 * As an employee, I need to add new stylists to our system when they are hired.
 * As an employee, I need to be able to add new clients to a specific stylist.
-* I should not be able to add a client if no stylists have been added.
+* As an employee, I need to be able to add new clients to a specific stylist. I should not be able to add a client if no stylists have been added.
+* As an employee, I need to be able to delete stylists (all and single).
+* As an employee, I need to be able to delete clients (all and single).
+* As an employee, I need to be able to view clients (all and single).
+* As an employee, I need to be able to edit JUST the name of a stylist.
+* As an employee, I need to be able to edit ALL of the information for a client.
+* As an employee, I need to be able to add a specialty and view all specialties that have been added.
+* As an employee, I need to be able to add a specialty to a stylist.
+* As an employee, I need to be able to click on a specialty and see all of the stylists that have that specialty.
+* As an employee, I need to see the stylist's specialties on the stylist's details page.
+* As an employee, I need to be able to add a stylist to a specialty.
 
 ## Setup/Installation Requirements
 ##### Download the required software
