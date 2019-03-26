@@ -27,23 +27,23 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void GetDetails_ReturnsDetails_String()
+    public void GetName_ReturnsName_String()
     {
       //Arrange
-      string details = "Test Stylist";
-      Stylist newStylist = new Stylist(details);
+      string name = "Test Stylist";
+      Stylist newStylist = new Stylist(name);
       //Act
-      string result = newStylist.GetDetails();
+      string result = newStylist.GetName();
       //Assert
-      Assert.AreEqual(details, result);
+      Assert.AreEqual(name, result);
     }
 
    //  [TestMethod]
    //  public void GetId_ReturnsStylistId_Int()
    //  {
    //    //Arrange
-   //    string details = "Test Stylist";
-   //    Stylist newStylist = new Stylist(details);
+   //    string name = "Test Stylist";
+   //    Stylist newStylist = new Stylist(name);
    //    //Act
    //    int result = newStylist.GetId();
    //    //Assert
@@ -54,11 +54,11 @@ namespace HairSalon.Tests
    public void GetAll_ReturnsAllStylistObjects_StylistList()
    {
      //Arrange
-     string details01 = "Client";
-     string details02 = "Specialty";
-     Stylist newStylist1 = new Stylist(details01);
+     string name01 = "Client";
+     string name02 = "Specialty";
+     Stylist newStylist1 = new Stylist(name01);
      newStylist1.Save();
-     Stylist newStylist2 = new Stylist(details02);
+     Stylist newStylist2 = new Stylist(name02);
      newStylist2.Save();
      List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
      //Act
@@ -83,8 +83,8 @@ namespace HairSalon.Tests
    public void GetClients_ReturnsEmptyClientList_ClientList()
    {
      //Arrange
-     string details = "Clients";
-     Stylist newStylist = new Stylist(details);
+     string name = "Clients";
+     Stylist newStylist = new Stylist(name);
      List<Client> newList = new List<Client> { };
      //Act
      List<Client> result = newStylist.GetClients();
@@ -102,7 +102,7 @@ namespace HairSalon.Tests
    }
 
    [TestMethod]
-   public void Equals_ReturnsTrueIfDetailsAreTheSame_Stylist()
+   public void Equals_ReturnsTrueIfNamesAreTheSame_Stylist()
    {
      //Arrange, Act
      Stylist firstStylist = new Stylist("Karri S.");
@@ -163,8 +163,8 @@ namespace HairSalon.Tests
    //   //Arrange
    //   Client testClient = new Client("Jeffandrew");
    //   testClient.Save();
-   //   string testDetails = "Karri S.";
-   //   Stylist testStylist = new Stylist(testDetails);
+   //   string testName = "Karri S.";
+   //   Stylist testStylist = new Stylist(testName);
    //   testStylist.Save();
    //   //Act
    //   testStylist.AddClient(testClient);
