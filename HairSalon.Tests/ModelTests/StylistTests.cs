@@ -102,11 +102,7 @@ namespace HairSalon.Tests
    }
 
    [TestMethod]
-<<<<<<< HEAD
-   public void Equals_ReturnsTrueIfNameAreTheSame_Stylist()
-=======
    public void Equals_ReturnsTrueIfNamesAreTheSame_Stylist()
->>>>>>> ad431f0ff38f16e77a16c7213e73b453802409bd
    {
      //Arrange, Act
      Stylist firstStylist = new Stylist("Karri S.");
